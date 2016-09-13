@@ -1,7 +1,10 @@
 <?php
 /*
+* 1.脚本运行环境与2016_tw为同一级目录
 * /usr/local/php56/bin/php -f translator.php batch 2016_tw
-* 脚本运行环境与2016_tw为同一级目录
+*
+* 2. 转换单个文件
+* /usr/local/php56/bin/php -f translator.php one 2016_tw/teacher/stuinfo.html
 */
 require 'fanJianConvert.php';
 
@@ -48,19 +51,19 @@ function outputHtml($filename, $data){
 目录递归函数
 实现办法：用dir返回对象
 ***********************/
-function tree($directory, $func) 
-{ 
-    $mydir = dir($directory); 
+function tree($directory, $func)
+{
+    $mydir = dir($directory);
     while($file = $mydir->read())
-    { 
+    {
         if($file === '.svn' OR $file === '.' OR $file === '..') continue;
-        if((is_dir("$directory/$file"))) 
+        if((is_dir("$directory/$file")))
         {
-            tree("$directory/$file", $func); 
-        } 
-        else 
+            tree("$directory/$file", $func);
+        }
+        else
         $func($directory.'/'.$file);
-    } 
-    $mydir->close(); 
-} 
+    }
+    $mydir->close();
+}
 ?>
